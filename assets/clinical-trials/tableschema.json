@@ -1,0 +1,119 @@
+{
+  "fields": [
+    {
+      "name": "primary-id",
+      "title": "Primary Registry and Trial Identifying Number",
+      "type": "string",
+      "format": "default"
+    },
+    {
+      "name": "registration-date",
+      "title": "Date of Registration in Primary Registry",
+      "type": "date",
+      "format": "default"
+    },
+    {
+      "name": "secondary-ids",
+      "title": "Secondary Identifying Numbers",
+      "type": "array",
+      "format": "default"
+    },
+    {
+      "name": "funders",
+      "title": "Source(s) of Monetary or Material Support",
+      "type": "array",
+      "format": "default"
+    },
+    {
+      "name": "primary-sponsor",
+      "title": "Primary Sponsor",
+      "type": "string",
+      "format": "default"
+    },
+    {
+      "name": "secondary-sponsors",
+      "title": "Secondary Sponsor(s)",
+      "type": "string",
+      "format": "default"
+    },
+    {
+      "name": "public-title",
+      "title": "Public Title",
+      "type": "string",
+      "format": "default"
+    },
+    {
+      "name": "scientific-title",
+      "title": "Scientific Title",
+      "type": "string",
+      "format": "default"
+    },
+    {
+      "name": "recruitment-countries",
+      "title": "Countries of Recruitment",
+      "type": "array",
+      "format": "default"
+    },
+    {
+      "name": "conditions",
+      "title": "Health Condition(s) or Problem(s) Studied",
+      "type": "array",
+      "format": "default"
+    },
+    {
+      "name": "interventions",
+      "title": "Intervention(s)",
+      "type": "string",
+      "format": "default"
+    },
+    {
+      "name": "study-type",
+      "title": "Study Type",
+      "type": "string",
+      "format": "default"
+    },
+    {
+      "name": "enrollment-date",
+      "title": "Date of First Enrollment",
+      "description": "Anticipated or actual date of enrolment of the first participant.",
+      "type": "date",
+      "format": "default"
+    },
+    {
+      "name": "sample-size",
+      "title": "Sample Size",
+      "type": "integer",
+      "format": "default"
+    },
+    {
+      "name": "recruitment-status",
+      "title": "Recruitment Status",
+      "type": "string",
+      "format": "default"
+    },
+    {
+      "name": "ethics-review",
+      "title": "Ethics Review",
+      "type": "string",
+      "format": "default"
+    },
+    {
+      "name": "completion-date",
+      "title": "Completion Date",
+      "type": "date",
+      "format": "default"
+    },
+    {
+      "name": "summary-results",
+      "title": "Summary Results",
+      "type": "string",
+      "format": "default"
+    },
+    {
+      "name": "ipd-statement",
+      "title": "IPD Sharing Statement",
+      "type": "string",
+      "format": "default"
+    }
+  ]
+}
