@@ -1,0 +1,247 @@
+{
+  "name": "colac-otway-shire-trees",
+  "title": "Colac Otway Shire Trees",
+  "homepage": "https://data.gov.au/dataset/colac-otway-shire-trees/resource/bcf1d62b-9e72-4eca-b183-418f83dedcea",
+  "profile": "assets/trees/trees-data-package.json",
+  "sources": [{
+    "title": "Australian Open Data Portal",
+    "path": "https://data.gov.au/dataset/colac-otway-shire-trees"
+  }],
+  "countryCode": "AU",
+  "geospatialCoverage": {
+    "type": "Polygon",
+    "coordinates": [
+      [[143.56408, -38.780105], [143.790448, -38.780105], [143.790448, -38.027444], [143.56408, -38.027444], [143.56408, -38.780105]]
+    ]
+  },
+  "licenses": [{
+    "name": "CC-BY-3.0-AU",
+    "path": "https://creativecommons.org/licenses/by/3.0/au/",
+    "title": "Creative Commons Attribution 3.0 Australia"
+  }],
+  "keywords": [
+    "trees",
+    "opencouncildata",
+    "ocd-trees-1.3"
+  ],
+  "resources": [
+    {
+      "name": "colac-otway-shire-trees",
+      "path": "data.csv",
+      "schema": {
+        "fields": [
+          {
+            "name": "lat",
+            "title": "Latitude in decimal degrees (EPSG:4326)",
+            "type": "number",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "lon",
+            "title": "Longitude in decimal degrees (EPSG:4326)",
+            "type": "number",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "genus",
+            "title": "Botanical genus, in title case (e.g. Eucalyptus)",
+            "type": "string"
+          },
+          {
+            "name": "species",
+            "title": "Botanical species, in title case (e.g. Regnans)",
+            "type": "string"
+          },
+          {
+            "name": "dbh",
+            "title": "Diameter at breast height (130cm above ground), in centimeters. If this information is available only as a range, this contains the middle of the range.",
+            "type": "number",
+            "constraints": {
+              "minimum": 0
+            }
+          },
+          {
+            "name": "dbh_min",
+            "title": "Minimum diameter at breast height (130cm above ground)",
+            "type": "number",
+            "constraints": {
+              "minimum": 0
+            }
+          },
+          {
+            "name": "dbh_max",
+            "title": "Maximum diameter at breast height (130cm above ground)",
+            "type": "number",
+            "constraints": {
+              "minimum": 0
+            }
+          },
+          {
+            "name": "year_min",
+            "title": "Lower bound on year that tree is expected to live to (e.g. A tree surveyed in 2008 with useful life expectancy range of 10-15 years would be 2018).",
+            "type": "year"
+          },
+          {
+            "name": "year_max",
+            "title": "Upper bound on year that tree is expected to live to (e.g. A tree surveyed in 2008 with useful life expectancy range of 10-15 years would be 2023).",
+            "type": "year"
+          },
+          {
+            "name": "crown",
+            "title": "Width in metres of the tree’s foliage (also known as crown spread). If this information is available only as a range, this contains the middle of the range.",
+            "type": "number",
+            "constraints": {
+              "minimum": 0
+            }
+          },
+          {
+            "name": "crown_min",
+            "title": "Minimum width in meters of the tree's foliage",
+            "type": "number",
+            "constraints": {
+              "minimum": 0
+            }
+          },
+          {
+            "name": "crown_max",
+            "title": "Maximum width in meters of the tree's foliage",
+            "type": "number",
+            "constraints": {
+              "minimum": 0
+            }
+          },
+          {
+            "name": "height",
+            "title": "Height in meters. If this information is available only as a range, this contains the middle of the range.",
+            "type": "number",
+            "constraints": {
+              "minimum": 0
+            }
+          },
+          {
+            "name": "height_min",
+            "title": "Minimum height in meters",
+            "type": "number",
+            "constraints": {
+              "minimum": 0
+            }
+          },
+          {
+            "name": "height_max",
+            "title": "Maximum height in meters",
+            "type": "number",
+            "constraints": {
+              "minimum": 0
+            }
+          },
+          {
+            "name": "common",
+            "title": "Common name for species (non-standardised)",
+            "type": "string"
+          },
+          {
+            "name": "location",
+            "title": "Where the tree is located",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "park",
+                "street",
+                "council"
+              ]
+            }
+          },
+          {
+            "name": "ref",
+            "title": "Council-specific identifier, enabling joining to other datasets",
+            "type": "number"
+          },
+          {
+            "name": "maintenance",
+            "title": "How often the tree is inspected (in months)",
+            "type": "number",
+            "constraints": {
+              "minimum": 0
+            }
+          },
+          {
+            "name": "maturity",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "young",
+                "semi-mature",
+                "mature",
+                "over-mature"
+              ]
+            }
+          },
+          {
+            "name": "planted",
+            "title": "Date of planting",
+            "type": "date"
+          },
+          {
+            "name": "updated",
+            "title": "Date of addition to database or most recent revision",
+            "type": "date"
+          },
+          {
+            "name": "health",
+            "title": "Health of tree growth",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "stump",
+                "dead",
+                "poor",
+                "fair",
+                "good"
+              ]
+            }
+          },
+          {
+            "name": "variety",
+            "title": "Any part of the scientific name below species level, including subspecies or variety",
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "title": "Other information about the tree that is not in its scientific name or species",
+            "type": "string"
+          },
+          {
+            "name": "family",
+            "title": "Botanical family",
+            "type": "string"
+          },
+          {
+            "name": "ule_min",
+            "title": "Lower bound on useful life expectancy when surveyed",
+            "type": "number",
+            "constraints": {
+              "minimum": 0
+            }
+          },
+          {
+            "name": "ule_max",
+            "title": "Upper bound on useful life expectancy when surveyed",
+            "type": "number",
+            "constraints": {
+              "minimum": 0
+            }
+          },
+          {
+            "name": "address",
+            "title": "Street address",
+            "type": "string"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -11,9 +11,9 @@ Within the Frictionless Data world, we purposefully refer to specification work 
 - A large and growing collection of tools, in many programming languages, for working with the Frictionless Data specifications
 - The specifications and the software are platform agnostic. A major example of this is being web-friendly without being dependent on the web (as with many linked data approaches). Linkable data, not Linked Data.
 
-We'll demonstrate this by some example below, which are a proof of concept for the idea of using Frictionless Data as a technical foundation for data standards. This is an ongoing work that we intend to iterate on in response to feedback to this initial take.
+We'll demonstrate this with some examples below, which are a proof of concept for the idea of using Frictionless Data as a technical foundation for data standards. This is an ongoing work that we intend to iterate on in response to feedback to this initial take.
 
-Of course, we do not in any way think that the technical implementation of a data standard is what "data standards" is about. Data standards are about communities of practice, stakeholder engagement, and increasingly, a vehicle of change at the level of policy and governance. Technical implementation, in this wider context, is but a small, yet crucial, component. Indeed, this is a critical part of the promise we are pointing to here - that by building on a common foundation, communities building data standards can focus a little less on the technical implementation details and a little more on the change we want to see by creating them.
+Of course, we do not in any way think that the technical implementation of a data standard is what "data standards" is about. Data standards are about communities of practice, stakeholder engagement, and increasingly, a vehicle of change at the level of policy and governance. Technical implementation, in this wider context, is but a small, yet crucial, component. Indeed, this is a critical part of the promise we are pointing to here - that by building on a common foundation, communities building data standards can focus a little less on the technical implementation details and a little more on the change they want to see by creating them.
 
 ## Examples
 
@@ -99,24 +99,77 @@ TODO: iterate over table in Python
 
 #### Overview
 
-Do a data package version of http://standards.opencouncildata.org/#/trees
+The [Open Council Data][opencouncildata] defined the standard [Trees 1.3][trees-spec] for describing the trees in a geographical region (e.g. a council). This standard includes information about the location, type, and other characteristics of individual trees, which is useful for planning future growth, maintenance of canopy cover, managing risk of falling branches, etc.
 
 #### Data
 
-TODO: A sample dataset
+We are using the from [Colac Otway Shire Trees][trees-datasource] as an example.
+
+| lat | lon | genus | species | dbh | dbh_min | dbh_max | year_min | year_max | crown | crown_min | crown_max | height | height_min | height_max | common | location | ref | maintenance | maturity | planted | updated | health | variety | description | family | ule_min | ule_max | address |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| -38.344595 | 143.592171 | Melaleuca | Stypheliodes | 1 |  |  |  |  |  |  |  | 5 |  |  | Prickly Paperback | street | 10001 |  | mature | 1975-01-01 |  |  |  |  |  |  |  | 106 Queen ST COLAC VIC 3250 |
+| -38.346198 | 143.591812 | Melaleuca | Stypheliodes | 1 |  |  |  |  |  |  |  | 4 |  |  | Prickly Paperback | street | 10004 |  | mature | 1975-01-01 |  |  |  |  |  |  |  | 122 Queen ST COLAC VIC 3250 |
+| -38.342097 | 143.588944 | Fraxinus | Excelsior | 1.2 |  |  |  |  |  |  |  | 12 |  |  | Golden Ash | street | 10007 |  | mature | 1980-01-01 |  |  |  |  |  |  |  | 40 Rae ST COLAC VIC 3250 |
+| -38.341927 | 143.588715 | Agonis | Flexuosa | 0.4 |  |  |  |  |  |  |  | 5 |  |  | Weeping Willow Myrtle | street | 10018 |  | semi-mature | 1980-01-01 |  |  |  |  |  |  |  | 47 Rae ST COLAC VIC 3250//next to coles coaches |
+| -38.342044 | 143.591182 | Eucalyptus | Nichollii | 0.3 |  |  |  |  |  |  |  | 6 |  |  | Willow Peppermint | street | 10021 |  | mature | 1980-01-01 |  |  |  |  |  |  |  | 56 Rae ST COLAC VIC 3250//Between Queen St & CCDA |
+
+This data was modified from the source to conform to the [Trees 1.3][trees-spec] specification. All the data is available [here][trees-data].
+
+#### Metadata
+
+The [Trees Data Package][trees-schema] extends the [Data Package][dp] specification by adding the following fields:
+
+| Name               | Description                                                                                     | Type    |
+| ---                | ---                                                                                             | ---     |
+| countryCode        | A single or an array of 2-letter ISO country code defining the country(ies) present in the data | string  |
+| geospatialCoverage | Geospatial area contained in the dataset                                                        | geojson |
 
 #### Fields
 
-TODO: Table Schema of required fields
-TODO: Wrap TS in a Data Package, use FKs if relevant. Convention of first resource as "fact" table.
-
-#### Validation schema
-
-TODO: Create JSON Schema that validates the Tabular Data Package under a custom profile name
+| Name | Title | Type | Constraints |
+| --- | --- | --- | --- |
+| lat | Latitude in decimal degrees (EPSG:4326) | number | **required**: True |
+| lon | Longitude in decimal degrees (EPSG:4326) | number | **required**: True |
+| genus | Botanical genus, in title case (e.g. Eucalyptus) | string |  |
+| species | Botanical species, in title case (e.g. Regnans) | string |  |
+| dbh | Diameter at breast height (130cm above ground), in centimeters. If this information is available only as a range, this contains the middle of the range. | number | **minimum**: 0 |
+| dbh_min | Minimum diameter at breast height (130cm above ground) | number | **minimum**: 0 |
+| dbh_max | Maximum diameter at breast height (130cm above ground) | number | **minimum**: 0 |
+| year_min | Lower bound on year that tree is expected to live to (e.g. A tree surveyed in 2008 with useful life expectancy range of 10-15 years would be 2018). | year |  |
+| year_max | Upper bound on year that tree is expected to live to (e.g. A tree surveyed in 2008 with useful life expectancy range of 10-15 years would be 2023). | year |  |
+| crown | Width in metres of the tree’s foliage (also known as crown spread). If this information is available only as a range, this contains the middle of the range. | number | **minimum**: 0 |
+| crown_min | Minimum width in meters of the tree's foliage | number | **minimum**: 0 |
+| crown_max | Maximum width in meters of the tree's foliage | number | **minimum**: 0 |
+| height | Height in meters. If this information is available only as a range, this contains the middle of the range. | number | **minimum**: 0 |
+| height_min | Minimum height in meters | number | **minimum**: 0 |
+| height_max | Maximum height in meters | number | **minimum**: 0 |
+| common | Common name for species (non-standardised) | string |  |
+| location | Where the tree is located | string | **enum**: ['park', 'street', 'council'] |
+| ref | Council-specific identifier, enabling joining to other datasets | number |  |
+| maintenance | How often the tree is inspected (in months) | number | **minimum**: 0 |
+| maturity |  | string | **enum**: ['young', 'semi-mature', 'mature', 'over-mature'] |
+| planted | Date of planting | date |  |
+| updated | Date of addition to database or most recent revision | date |  |
+| health | Health of tree growth | string | **enum**: ['stump', 'dead', 'poor', 'fair', 'good'] |
+| variety | Any part of the scientific name below species level, including subspecies or variety | string |  |
+| description | Other information about the tree that is not in its scientific name or species | string |  |
+| family | Botanical family | string |  |
+| ule_min | Lower bound on useful life expectancy when surveyed | number | **minimum**: 0 |
+| ule_max | Upper bound on useful life expectancy when surveyed | number | **minimum**: 0 |
+| address | Street address | string |  |
 
 #### Usage
 
-TODO: iterate over table in Python
+```python
+import datapackage
+
+datapackage_url = 'https://raw.githubusercontent.com/frictionlessdata/profiles/master/assets/trees/datapackage.json'
+dp = datapackage.Package(datapackage_url)
+
+for row in dp.resources[0].iter(keyed=True):
+    print(row)
+    # {'lat': Decimal('-38.347497'), 'lon': Decimal('143.595686'), 'genus': 'Melaleuca', 'species': 'Nesophila', 'dbh': Decimal('0.25'), 'dbh_min': None, 'dbh_max': None, 'year_min': None, 'year_max': None, 'crown': None, 'crown_min': None, 'crown_max': None, 'height': Decimal('2'), 'height_min': None, 'height_max': None, 'common': 'Snowy Honey Myrtle', 'location': 'street', 'ref': Decimal('10379'), 'maintenance': None, 'maturity': 'semi-mature', 'planted': datetime.date(1980, 1, 1), 'updated': None, 'health': None, 'variety': None, 'description': None, 'family': None, 'ule_min': None, 'ule_max': None, 'address': '18 Thomas ST COLAC VIC 3250'}
+```
 
 ### Street furniture
 
@@ -155,9 +208,17 @@ For now, all the schemas above work as described, right now, and open up all the
 
 [fd]: https://frictionlessdata.io
 [tdp]: https://frictionlessdata.io/specs/tabular-data-package/
+[dp]: https://frictionlessdata.io/specs/data-package/
 [fdp]: https://frictionlessdata.io/specs/fiscal-data-package/
 [fdpv1]: https://hackmd.io/BwNgpgrCDGDsBMBaAhtALARkWsPEE5posR8RxgAzffWfDIA=
 [ts]: https://frictionlessdata.io/specs/table-schema/
 [profile]: https://frictionlessdata.io/specs/profiles/
 [who]: http://www.who.int/ictrp/network/trds/en/
 [ot]: https://opentrials.net
+[who-dataset]: http://www.who.int/ictrp/network/trds/en/ "World Health Organisation Trial Registration Data Set"
+[opencouncildata]: https://opencouncildata.org/ "Open Council Data"
+[trees-data]: assets/trees/data.csv "Trees CSV"
+[trees-dp]: assets/trees/datapackage.json "Trees Data Package"
+[trees-schema]: assets/trees/trees-data-package "Trees Data Package JSON Schema"
+[trees-spec]: http://standards.opencouncildata.org/#/trees "Open Council Data: Trees 1.3 Specification"
+[trees-datasource]: https://data.gov.au/dataset/colac-otway-shire-trees/resource/bcf1d62b-9e72-4eca-b183-418f83dedcea "Colac Otway Shire Trees"
