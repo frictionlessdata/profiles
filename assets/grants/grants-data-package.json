@@ -1,0 +1,64 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "360Giving Grants Data Package",
+    "description": "The Grants Data Package is a simple specification for packaging data from funders about grants awarded.",
+    "type": "object",
+    "definitions": {
+        "funder": {
+            "required": [
+                "id",
+                "name"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "A globally unique identifier for this organisation. This is important to enable data on funders and recipients to be linked up across different grant-makers. The [Organisation Identifier Standard](http://www.threesixtygiving.org/standard/identifiers/#toc-organisation-identifier) guidance explains how to create this ID, based either on the known company or charity number, or upon identifiers held in the grant-maker's internal systems.",
+                    "title": "Identifier"
+                },
+                "name": {
+                    "type": "string",
+                    "title": "Name",
+                    "description": "The funder organization name"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "The email address for this organisation.",
+                    "title": "Email"
+                },
+                "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "A web address for the Organisation",
+                    "title": "Web Address"
+                }
+            }
+        }
+    },
+    "allOf": [
+        {
+            "$ref": "https://frictionlessdata.io/schemas/data-package.json"
+        },
+        {
+            "required": [
+                "funder",
+                "year"
+            ],
+            "properties": {
+                "funder": {
+                    "$ref": "#/definitions/funder"
+                },
+                "year": {
+                    "type": "integer",
+                    "title": "Year",
+                    "description": "The year covered by this data"
+                },
+                "modified": {
+                    "type": "string",
+                    "format": "date-time",
+                    "title": "Modification date",
+                    "description": "A timestamp of when this dataset was last modified"
+                }
+            }
+        }
+    ]
+}
