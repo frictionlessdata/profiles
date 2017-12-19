@@ -55,22 +55,121 @@ TODO: Python example.
 
 #### Overview
 
+[360Giving](http://www.threesixtygiving.org/) is an organization that helps funders to be transparent about the grants they award. It provides a [standard](http://standard.threesixtygiving.org/en/latest/) for publishing grants data in a common format, and a [Registry](http://www.threesixtygiving.org/data/data-registry/) to host the data. Publishers can upload a spreadsheet that contains various fields describing the different activities they funded. We will demonstrate how a custom Data Package profile could describe one of these spreadsheets, ensuring that the required metadata fields are present and that the contents of the file conform to the [schema](http://standard.threesixtygiving.org/en/latest/reference/#grants-sheet).
+
 #### Data
 
-TODO: A sample dataset
+We will use this [sample dataset](http://www.blagravetrust.org/wp-content/uploads/2017/01/360G-blagravetrust-2016.xlsx), taken directly from the Registry without any changes:
+
+| Identifier | Title | Description | Currency | Amount Awarded | Amount Disbursed | Award Date
+| --- | --- | --- | --- | --- | --- | --- |
+| 360G-blagravetrust-00658000009YZRq | Achieving Further | Work with 22 FE colleges to improve attainment; attendance and participation | GBP | 300000 | 300000 | 2014-07-08
+| 360G-blagravetrust-00658000007A1UQ | Training on feedback for Portsmouth VCS | Improving feedback skills for Portsmouth VCS - Feedback Fund 2016 | GBP | 3933 | 3933 | 2016-08-09
+| 360G-blagravetrust-00658000008vdAl | Creative learning programme | Portsmouth young people leaving care | GBP | 75000 | 25000 | 2016-11-08
+| 360G-blagravetrust-00658000007lweS | Feedback Fund | Feedback Fund 2016 | GBP | 2094 | 2094 | 2016-08-09
+
 
 #### Fields
 
-TODO: Table Schema of required fields
-TODO: Wrap TS in a Data Package, use FKs if relevant. Convention of first resource as "fact" table.
+Our first step was to create a Table Schema describing the expected contents of the fields, which was then [embedded](https://github.com/frictionlessdata/profiles/blob/c3423d1266439ffebfdac2b681d3dd0bffd81964/assets/grants/datapackage.json#L39) in the Data Package descriptor. This was easy as like we mentioned before, there already is a well defined [schema](http://standard.threesixtygiving.org/en/latest/reference/#grants-sheet) for how the fields should be. For the purposes of this example we just focused on a subset of all available fields. Here are some example fields:
 
-#### Validation schema
+ Name / Title | Type | Constraints |
+| --- | --- | --- |
+| Identifier | string |  |
+| Title | string | **maxLength**: 140 |
+| Description | string |  |
+| Currency | string | **enum**: ['AED', 'AFN', 'ALL', 'AMD', ...] |
+| Amount Awarded | number |  |
+| Amount Disbursed | number |  |
+| Award Date | date |  |
+| URL | string |  |
+| ... | ... | ... |
+| Funding Org:Name | string |  |
+| Funding Org:Department | string |  |
+| Grant Programme:Code | string |  |
+| Grant Programme:Title | string |  |
+| Grant Programme:URL | string |  |
+| From an open call? | string |  |
+| Related Activity | string |  |
+| Last modified | datetime |  |
+| Data Source | string |  |
 
-TODO: Create JSON Schema that validates the Tabular Data Package under a custom profile name
+#### Metadata
+
+Our custom [Grants Data Package](assets/grants/grants-data-package.json) extends the [Data Package][dp] specification by adding the following fields:
+
+| Name               | Description                                                                                     | Type    |
+| ---                | ---                                                                                             | ---     |
+| funder        | A JSON object describing the funding organization. It can include the following properties: `id`, `name`, `email`, `url` | object  |
+| year | The year that the grants data in this file covers | integer |
+| modified | The timestap of when this dataset was last modifed | datetime |
+
+This follows closely the [JSON specification](https://threesixtygiving.github.io/getdata/) that 360Giving has, with the rest of the fields covered by the standard Data Package specification.
+
 
 #### Usage
 
-TODO: iterate over table in Python
+Once we have our data packaged in this way, we can leverage all the ecosystem of tools built around Data Packages to work with it. For instance, using the [`datapackage`](https://github.com/frictionlessdata/datapackage-py) library we can iterate over the contents of the file:
+
+```python
+import datapackage
+
+datapackage_url = 'https://raw.githubusercontent.com/frictionlessdata/profiles/master/assets/grants/datapackage.json'
+dp = datapackage.Package(datapackage_url)
+
+for row in dp.resources[0].iter(keyed=True):
+    print(row)
+    # {'Funding Org:Identifier': 'GB-CHC-1164021', 'Beneficiary Location:Geographic Code Type': 'UA', 'From an open call?': None, 'Beneficiary Location:Name': 'Reading', 'Grant Programme:Code': None, 'Beneficiary Location:Geographic Code': 'E06000038', 'Amount Disbursed': Decimal('300000'), 'Recipient Org:City': 'Newbury', 'Award Date': datetime.datetime(2014, 7, 8, 0, 0), 'Beneficiary Location:Longitude': Decimal('-0.95543100000000003024780426130746491253376007080078125'), 'Recipient Org:Web Address': 'http://www.afaeducation.org', 'Recipient Org:Charity Number': '1142154', 'Grant Programme:Title': None, 'Related Activity': None, 'Grant Programme:URL': None, 'Recipient Org:Country': 'UK', 'Funding Org:Name': 'The Blagrave Trust', 'Title': 'Achieving Further', 'Planned Dates:End Date': datetime.datetime(2017, 6, 30, 0, 0), 'Recipient Org:Postal Code': 'RG14 1JQ', 'Identifier': '360G-blagravetrust-00658000009YZRq', 'Data Source': None, 'Planned Dates:Start Date': None, 'Currency': 'GBP', 'Description': 'Work with 22 FE colleges to improve attainment; attendance and participation', 'Recipient Org:Identifier': 'GB-CHC-1142154', 'Recipient Org:Description': 'Charity working with nurseries schools and colleges to raise attainment and achivement of children particularly those with barriers to learning', 'Funding Org:Department': None, 'Beneficiary Location:Country Code': None, 'Last modified': None, 'URL': None, 'Amount Awarded': Decimal('300000'), 'Beneficiary Location:Latitude': Decimal('51.4541449999999969122654874809086322784423828125'), 'Recipient Org:County': 'Berkshire', 'Recipient Org:Name': 'Achievement for All', 'Recipient Org:Street Address': 'Oxford House, Oxford Street', 'Planned Dates:Duration (months)': None, 'Recipient Org:Company Number': None}
+ 
+```
+
+Also, as we define the Table Schema, we can use [goodtables](https://github.com/frictionlessdata/goodtables-py) to perform data validation and get a report of issues found:
+
+```python
+from goodtables import validate
+
+datapackage_url = 'https://raw.githubusercontent.com/frictionlessdata/profiles/master/assets/grants/datapackage.json'
+validate(datapackage_url)
+	'''
+	{'error-count': 0,
+	 'preset': 'datapackage',
+	 'table-count': 1,
+	 'tables': [{'datapackage': 'https://raw.githubusercontent.com/frictionlessdata/profiles/c3423d1266439ffebfdac2b681d3dd0bffd81964/assets/grants/datapackage.json',
+	   'encoding': None,
+	   'error-count': 0,
+	   'errors': [],
+	   'format': 'inline',
+	   'headers': ['Identifier',
+		'Title',
+		'Description',
+		'Currency',
+		'Amount Awarded',
+		'Amount Disbursed',
+		'Award Date',
+		'URL',
+		'Planned Dates:Start Date',
+
+		...		
+
+		'Grant Programme:URL',
+		'From an open call?',
+		'Related Activity',
+		'Last modified',
+		'Data Source'],
+	   'row-count': 70,
+	   'schema': 'table-schema',
+	   'scheme': None,
+	   'source': 'https://raw.githubusercontent.com/frictionlessdata/profiles/c3423d1266439ffebfdac2b681d3dd0bffd81964/assets/grants/360G-blagravetrust-2016.xlsx',
+	   'time': 0.53,
+	   'valid': True}],
+	 'time': 1.386,
+	 'valid': True,
+	 'warnings': []}
+	'''
+
+```
+
+
 
 ### Art collections
 

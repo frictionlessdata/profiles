@@ -1,0 +1,485 @@
+{
+    "name": "360giving-blagrave-trust-2016",
+    "title": "360Giving data: Grants awarded by the Blagrave Trust in 2016",
+    "description": "This is an example data package showcasing how grants data for a particular funder and a particular year could be packaged using data packages profiles",
+    "profile": "assets/grants/grants-data-package.json",
+    "sources": [
+        {
+            "title": "360Giving Data Registry",
+            "path": "http://www.threesixtygiving.org/data/data-registry/"
+        }
+    ],
+    "licenses": [
+        {
+            "name": "CC-BY-4.0",
+            "path": "https://creativecommons.org/licenses/by/4.0/",
+            "title": "Creative Commons Attribution 4.0 International"
+        }
+    ],
+    "keywords": [
+        "grants",
+        "funding",
+        "360giving",
+        "blagrave-trust"
+    ],
+    "created": "2017-12-13T12:30:13.23Z",
+    "modified": "2017-12-14T14:41:20.12Z",
+    "funder": {
+        "id": "GB-CHC-1164021",
+        "name": "The Blagrave Trust",
+        "uri": "https://www.blagravetrust.org/"
+    },
+    "year": 2016,
+    "resources": [
+        {
+            "name": "360giving-blagrave-trust-2016",
+            "path": "360G-blagravetrust-2016.xlsx",
+            "format": "xlsx",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "Identifier",
+                        "title": "Identifier",
+                        "description": "The unique identifier for this grant. Made up of your 360Giving prefix, and an identifier from your records. See the '360Giving Grant identifier guidance' for details.",
+                        "type": "string",
+                        "required": "True"
+                    },
+                    {
+                        "name": "Title",
+                        "title": "Title",
+                        "description": "A title for this grant activity. This should be under 140 characters long.",
+                        "type": "string",
+                        "required": "True",
+                        "constraints": {
+                            "maxLength": 140
+                        }
+                    },
+                    {
+                        "name": "Description",
+                        "title": "Description",
+                        "description": "A short description of this grant activity.",
+                        "type": "string",
+                        "required": "True"
+                    },
+                    {
+                        "name": "Currency",
+                        "title": "Currency",
+                        "description": "The currency used in amounts. Use the three-letter currency code from ISO 4217. eg: Use GBP for Pounds Sterling.",
+                        "type": "string",
+                        "required": "True",
+                        "constraints": {
+                            "enum": [
+                                "AED",
+                                "AFN",
+                                "ALL",
+                                "AMD",
+                                "ANG",
+                                "AOA",
+                                "ARS",
+                                "AUD",
+                                "AWG",
+                                "AZN",
+                                "BAM",
+                                "BBD",
+                                "BDT",
+                                "BGN",
+                                "BHD",
+                                "BIF",
+                                "BMD",
+                                "BND",
+                                "BOB",
+                                "BRL",
+                                "BSD",
+                                "BTN",
+                                "BWP",
+                                "BYR",
+                                "BZD",
+                                "CAD",
+                                "CDF",
+                                "CHF",
+                                "CLP",
+                                "CNY",
+                                "COP",
+                                "CRC",
+                                "CUC",
+                                "CUP",
+                                "CVE",
+                                "CZK",
+                                "DJF",
+                                "DKK",
+                                "DOP",
+                                "DZD",
+                                "EGP",
+                                "ERN",
+                                "ETB",
+                                "EUR",
+                                "FJD",
+                                "FKP",
+                                "GBP",
+                                "GEL",
+                                "GGP",
+                                "GHS",
+                                "GIP",
+                                "GMD",
+                                "GNF",
+                                "GTQ",
+                                "GYD",
+                                "HKD",
+                                "HNL",
+                                "HRK",
+                                "HTG",
+                                "HUF",
+                                "IDR",
+                                "ILS",
+                                "IMP",
+                                "INR",
+                                "IQD",
+                                "IRR",
+                                "ISK",
+                                "JEP",
+                                "JMD",
+                                "JOD",
+                                "JPY",
+                                "KES",
+                                "KGS",
+                                "KHR",
+                                "KMF",
+                                "KPW",
+                                "KRW",
+                                "KWD",
+                                "KYD",
+                                "KZT",
+                                "LAK",
+                                "LBP",
+                                "LKR",
+                                "LRD",
+                                "LSL",
+                                "LTL",
+                                "LVL",
+                                "LYD",
+                                "MAD",
+                                "MDL",
+                                "MGA",
+                                "MKD",
+                                "MMK",
+                                "MNT",
+                                "MOP",
+                                "MRO",
+                                "MUR",
+                                "MVR",
+                                "MWK",
+                                "MXN",
+                                "MYR",
+                                "MZN",
+                                "NAD",
+                                "NGN",
+                                "NIO",
+                                "NOK",
+                                "NPR",
+                                "NZD",
+                                "OMR",
+                                "PAB",
+                                "PEN",
+                                "PGK",
+                                "PHP",
+                                "PKR",
+                                "PLN",
+                                "PYG",
+                                "QAR",
+                                "RON",
+                                "RSD",
+                                "RUB",
+                                "RWF",
+                                "SAR",
+                                "SBD",
+                                "SCR",
+                                "SDG",
+                                "SEK",
+                                "SGD",
+                                "SHP",
+                                "SLL",
+                                "SOS",
+                                "SPL",
+                                "SRD",
+                                "STD",
+                                "SVC",
+                                "SYP",
+                                "SZL",
+                                "THB",
+                                "TJS",
+                                "TMT",
+                                "TND",
+                                "TOP",
+                                "TRY",
+                                "TTD",
+                                "TVD",
+                                "TWD",
+                                "TZS",
+                                "UAH",
+                                "UGX",
+                                "USD",
+                                "UYU",
+                                "UZS",
+                                "VEF",
+                                "VND",
+                                "VUV",
+                                "WST",
+                                "XAF",
+                                "XCD",
+                                "XDR",
+                                "XOF",
+                                "XPF",
+                                "YER",
+                                "ZAR",
+                                "ZMW",
+                                "ZWD"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "Amount Awarded",
+                        "title": "Amount Awarded",
+                        "description": "Total amount awarded in numbers (do not include commas or currency symbols such as \u00a3). If you have provided detailed transaction information on a separate table, this should equal the sum of all the award transactions for this grant.",
+                        "type": "number",
+                        "required": "True"
+                    },
+                    {
+                        "name": "Amount Disbursed",
+                        "title": "Amount Disbursed",
+                        "description": "Total amount disbursed (paid) to this grantee when this record was last updated (in numbers: do not include commas or currency symbols such as \u00a3)). If you have provided detailed transaction information on a separate table, this should equal the sum of all the disbursement transactions for this grant.",
+                        "type": "number",
+                        "required": "False"
+                    },
+                    {
+                        "name": "Award Date",
+                        "title": "Award Date",
+                        "description": "When was the decision to award this grant made. Dates should be in YYYY-MM-DD format.",
+                        "type": "date",
+                        "required": "True"
+                    },
+                    {
+                        "name": "URL",
+                        "title": "URL",
+                        "description": "A URL (Web Address) where further information about this grant can be found. This could point to the website of the recipient organisation, or might link to further details on the funders website.",
+                        "type": "string",
+                        "format": "uri",
+                        "required": "False"
+                    },
+                    {
+                        "name": "Planned Dates:Start Date",
+                        "title": "Planned Dates:Start Date",
+                        "description": "All events should have a start date. Dates should be in YYYY-MM-DD format. If the month or day are not available, these may be omitted.",
+                        "type": "date",
+                        "required": "False"
+                    },
+                    {
+                        "name": "Planned Dates:End Date",
+                        "title": "Planned Dates:End Date",
+                        "description": "Events or activities lasting more than one day should have either a duration (in months) or an end date. Dates should be in YYYY-MM-DD format. If the month or day are not available, these may be omitted.",
+                        "type": "date",
+                        "required": "False"
+                    },
+                    {
+                        "name": "Planned Dates:Duration (months)",
+                        "title": "Planned Dates:Duration (months)",
+                        "description": "Events or activities lasting more than one day should have either a duration (in months) or an end date.",
+                        "type": "string",
+                        "required": "False"
+                    },
+                    {
+                        "name": "Recipient Org:Identifier",
+                        "title": "Recipient Org:Identifier",
+                        "description": "A globally unique identifier for this organisation. This is important to enable data on funders and recipients to be linked up across different grant-makers. The 'Organisation Identifier Standard' guidance explains how to create this ID, based either on the known company or charity number, or upon identifiers held in the grant-maker's internal systems.",
+                        "type": "string",
+                        "required": "True"
+                    },
+                    {
+                        "name": "Recipient Org:Name",
+                        "title": "Recipient Org:Name",
+                        "description": "Organisation name",
+                        "type": "string",
+                        "required": "True"
+                    },
+                    {
+                        "name": "Recipient Org:Charity Number",
+                        "title": "Recipient Org:Charity Number",
+                        "description": "Registered charity number, if applicable.",
+                        "type": "string",
+                        "required": "False"
+                    },
+                    {
+                        "name": "Recipient Org:Company Number",
+                        "title": "Recipient Org:Company Number",
+                        "description": "Registered UK company number, if applicable.",
+                        "type": "string",
+                        "required": "False"
+                    },
+                    {
+                        "name": "Recipient Org:Street Address",
+                        "title": "Recipient Org:Street Address",
+                        "description": "Building number and street name.",
+                        "type": "string",
+                        "required": "False"
+                    },
+                    {
+                        "name": "Recipient Org:City",
+                        "title": "Recipient Org:City",
+                        "description": "City or town.",
+                        "type": "string",
+                        "required": "False"
+                    },
+                    {
+                        "name": "Recipient Org:County",
+                        "title": "Recipient Org:County",
+                        "description": "County",
+                        "type": "string",
+                        "required": "False"
+                    },
+                    {
+                        "name": "Recipient Org:Country",
+                        "title": "Recipient Org:Country",
+                        "description": "Country",
+                        "type": "string",
+                        "required": "False"
+                    },
+                    {
+                        "name": "Recipient Org:Postal Code",
+                        "title": "Recipient Org:Postal Code",
+                        "description": "Postal code (please try and provide a post code whenever possible)",
+                        "type": "string",
+                        "required": "False"
+                    },
+                    {
+                        "name": "Recipient Org:Description",
+                        "title": "Recipient Org:Description",
+                        "description": "A short description of this organisation and its area of work",
+                        "type": "string",
+                        "required": "False"
+                    },
+                    {
+                        "name": "Recipient Org:Web Address",
+                        "title": "Recipient Org:Web Address",
+                        "description": "A web address for the Organisation",
+                        "type": "string",
+                        "format": "uri",
+                        "required": "False"
+                    },
+                    {
+                        "name": "Beneficiary Location:Name",
+                        "title": "Beneficiary Location:Name",
+                        "description": "A name for this location.",
+                        "type": "string",
+                        "required": "False"
+                    },
+                    {
+                        "name": "Beneficiary Location:Country Code",
+                        "title": "Beneficiary Location:Country Code",
+                        "description": "The ISO Country Code of the location of this activity.",
+                        "type": "string",
+                        "required": "False"
+                    },
+                    {
+                        "name": "Beneficiary Location:Latitude",
+                        "title": "Beneficiary Location:Latitude",
+                        "description": "The latitude of a point location",
+                        "type": "number",
+                        "required": "False"
+                    },
+                    {
+                        "name": "Beneficiary Location:Longitude",
+                        "title": "Beneficiary Location:Longitude",
+                        "description": "The longitude of a point location",
+                        "type": "number",
+                        "required": "False"
+                    },
+                    {
+                        "name": "Beneficiary Location:Geographic Code",
+                        "title": "Beneficiary Location:Geographic Code",
+                        "description": "A code referring to a geographical area, drawn from an established gazetteer. For example, the code for a local authority ward, or parliamentary constituency.",
+                        "type": "string",
+                        "required": "False"
+                    },
+                    {
+                        "name": "Beneficiary Location:Geographic Code Type",
+                        "title": "Beneficiary Location:Geographic Code Type",
+                        "description": "The type of Geographic Code (geoCode) used (e.g. Ward, Parliamentary Constituency etc.). This value for this field should be drawn from the codelist of geographic code types.",
+                        "type": "string",
+                        "required": "False"
+                    },
+                    {
+                        "name": "Funding Org:Identifier",
+                        "title": "Funding Org:Identifier",
+                        "description": "A globally unique identifier for this organisation. This is important to enable data on funders and recipients to be linked up across different grant-makers. The 'Organisation Identifier Standard 'guidance explains how to create this ID, based either on the known company or charity number, or upon identifiers held in the grant-maker's internal systems.",
+                        "type": "string",
+                        "required": "True"
+                    },
+                    {
+                        "name": "Funding Org:Name",
+                        "title": "Funding Org:Name",
+                        "description": "Organisation name",
+                        "type": "string",
+                        "required": "True"
+                    },
+                    {
+                        "name": "Funding Org:Department",
+                        "title": "Funding Org:Department",
+                        "description": "The department or sub-unit of this organisation making or receiving the grant.",
+                        "type": "string",
+                        "required": "False"
+                    },
+                    {
+                        "name": "Grant Programme:Code",
+                        "title": "Grant Programme:Code",
+                        "description": "An identifier for this grant programme.",
+                        "type": "string",
+                        "required": "False"
+                    },
+                    {
+                        "name": "Grant Programme:Title",
+                        "title": "Grant Programme:Title",
+                        "description": "The title of this grant programme.",
+                        "type": "string",
+                        "required": "False"
+                    },
+                    {
+                        "name": "Grant Programme:URL",
+                        "title": "Grant Programme:URL",
+                        "description": "A web link to more details of this grant programme.",
+                        "type": "string",
+                        "format": "uri",
+                        "required": "False"
+                    },
+                    {
+                        "name": "From an open call?",
+                        "title": "From an open call?",
+                        "description": "Was this grant made as the result of an open call for applications? Values should be 'Yes' or 'No'",
+                        "type": "string",
+                        "required": "False"
+                    },
+                    {
+                        "name": "Related Activity",
+                        "title": "Related Activity",
+                        "description": "The identifiers of any related activities (e.g. other grants given as part of a multi-grant project).",
+                        "type": "string",
+                        "required": "False"
+                    },
+                    {
+                        "name": "Last modified",
+                        "title": "Last modified",
+                        "description": "The date and time when information about this grant was last updated.",
+                        "type": "datetime",
+                        "required": "False"
+                    },
+                    {
+                        "name": "Data Source",
+                        "title": "Data Source",
+                        "description": "A web link pointing to the source of this data. This may be an original 360Giving data file, a file from which the data was converted, or an organisation website.",
+                        "type": "string",
+                        "format": "uri",
+                        "required": "False"
+                    }
+                ]
+            }
+        }
+    ]
+}
