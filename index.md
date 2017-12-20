@@ -169,6 +169,39 @@ validate(datapackage_url)
 
 ```
 
+### IATI Registry
+
+#### Overview
+
+The [IATI Standard][iati-standard] is a technical framework to publish aid, development, and humanitarian data in a standard way. Data published in the IATI standard is indexed on the [IATI Registry][iati-registry]. Here we will demonstrate the creation of a custom Data Package profile to package data meant to be published in the registry, ensuring that it has the required metadata.
+
+#### Metadata
+
+Here are the fields available when publishing a new IATI file on the registry:
+
+| Name | Data Package field | Description | Type |
+| --- | --- | --- | --- |
+| `registry-file-id` | `name ` | A unique identifier for the activity record | string
+| `registry-publisher-id` | - | Publisher identificator on the IATI Registry | string
+| `title` | `title ` | The title of the dataset | string
+| `description` | `description` | Some useful notes about the data | string
+| `source-url` | `resources[0]['path']` | URL to a publicly accessible IATI file | string
+| `contact-email` | - | Contact email for publisher | string
+| `file-type` | - | Must be either 'Activity' or 'Organization' | string
+| `recipient-country` | - | Recipient country | string
+| `last-updated-datetime` | - | Timestamp of the last modification | date-time
+| `activity-count` | - | Number of activities described in the data | integer
+| `default-language` | - | Language of the data | string
+| `secondary-publisher` | - | The publisher this dataset is published on behalf of | string
+
+To create the new profile, we will add those fields that do not map directly to the [Data Package specification](https://frictionlessdata.io/specs/data-package/) to a standard Data Package descriptor and create a custom JSON Schema to validate it.
+
+
+
+
+[iati-standard]: http://iatistandard.org/
+[iati-registry]: https://iatiregistry.org/
+
 
 
 ### Art collections

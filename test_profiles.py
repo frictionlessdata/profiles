@@ -1,19 +1,28 @@
 import os
 import json
+import pytest
 from jsonschema import validate
 
-PROFILES = [
-    'assets/trees/trees-data-package.json',
-    'assets/grants/grants-data-package.json',
-]
+
+def find_profiles():
+    profiles = []
+    for root, dirs, files in os.walk('assets'):
+        path = root.split(os.sep)
+        for _file in files:
+            if _file.endswith('-data-package.json'):
+                profiles.append(os.path.join(path[0], path[1], _file))
+    return profiles
 
 
-for profile in PROFILES:
-    base_dir = os.path.dirname(profile)
+@pytest.mark.parametrize('profile_path', find_profiles())
+def test_profile(profile_path):
+    base_dir = os.path.dirname(profile_path)
+    datapackage_path = os.path.join(base_dir, 'datapackage.json')
 
-    data_package_descriptor = json.load(
-        open(os.path.join(base_dir, 'datapackage.json'), 'r'))
+    with open(datapackage_path, 'r') as fp:
+        datapackage_descriptor = json.load(fp)
 
-    json_schema = json.load(open(profile, 'r'))
+    with open(profile_path, 'r') as fp:
+        jsonschema = json.load(fp)
 
-    validate(data_package_descriptor, json_schema)
+    validate(datapackage_descriptor, jsonschema)

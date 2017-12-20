@@ -1,0 +1,63 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "allOf": [
+        {
+            "$ref": "https://frictionlessdata.io/schemas/data-package.json"
+        },
+        {
+            "properties": {
+                "activity-count": {
+                    "description": "Number of activities described in the data",
+                    "title": "Activity count",
+                    "type": "integer"
+                },
+                "contact-email": {
+                    "description": "Contact email for publisher",
+                    "title": "Contact email",
+                    "type": "string"
+                },
+                "default-language": {
+                    "description": "Language of the data",
+                    "title": "Default language",
+                    "type": "string"
+                },
+                "file-type": {
+                    "description": "Must be either 'Activity' or 'Organization'",
+                    "title": "File type",
+                    "type": "string"
+                },
+                "last-updated-datetime": {
+                    "description": "Timestamp of the last modification",
+                    "title": "Last updated",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "recipient-country": {
+                    "description": "Recipient country",
+                    "title": "Recipient country",
+                    "type": "string"
+                },
+                "registry-publisher-id": {
+                    "description": "Publisher identificator on the IATI Registry",
+                    "title": "Registry Publisher id",
+                    "type": "string"
+                },
+                "secondary-publisher": {
+                    "description": "The publisher this dataset is published on behalf of",
+                    "title": "Secondary publisher",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "registry-publisher-id",
+                "contact-email",
+                "default-language",
+                "file-type",
+                "recipient-country"
+            ]
+        }
+    ],
+    "description": "The Grants Data Package is a simple specification for packaging data from funders about grants awarded.",
+    "title": "360Giving Grants Data Package",
+    "type": "object"
+}

@@ -1,0 +1,34 @@
+{
+    "activity-count": 122,
+    "contact-email": "wfpinfo@wfp.org",
+    "default-language": "en",
+    "description": "This is an example data package showcasing how grants data for a particular funder and a particular year could be packaged using data packages profiles",
+    "file-type": "activity",
+    "last-updated-datetime": "2017-12-12T15:19:51Z",
+    "licenses": [
+        {
+            "name": "CC-BY-4.0",
+            "path": "https://creativecommons.org/licenses/by/4.0/",
+            "title": "Creative Commons Attribution 4.0 International"
+        }
+    ],
+    "name": "wfp-southafrica",
+    "profile": "assets/iatiregistry/iati-registry-data-package.json",
+    "recipient-country": "",
+    "registry-publisher-id": "wfp",
+    "resources": [
+        {
+            "format": "xml",
+            "name": "wfp-southafrica-iati",
+            "path": "http://cdn.wfp.org/iati/rb-johannesburg.xml"
+        }
+    ],
+    "secondary-publisher": "",
+    "sources": [
+        {
+            "path": "http://www1.wfp.org/",
+            "title": "World Food Program"
+        }
+    ],
+    "title": "World Food Programme activities - Southern Africa"
+}
